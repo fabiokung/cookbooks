@@ -27,6 +27,7 @@ include_recipe "ruby"
 include_recipe "apache2"
 
 if platform?("centos","redhat")
+  package "gcc-c++"
   if dist_only?
     # just the gem, we'll install the apache module within apache2
     package "rubygem-passenger"
@@ -41,6 +42,8 @@ else
     end
   end
 end
+
+package "build-essential" if platform?("debian")
 
 gem_package "passenger" do
   version node[:passenger][:version]
