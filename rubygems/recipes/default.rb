@@ -21,3 +21,7 @@
 execute "gem sources --add http://rubygems.org" do
   not_if "gem sources --list | grep 'http://rubygems.org'"
 end
+
+if platform?("debian")
+  execute "export PATH=$PATH:/var/lib/gems/1.8/bin"
+end
