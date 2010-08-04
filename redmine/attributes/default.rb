@@ -30,7 +30,7 @@ set[:redmine][:dir] = "/srv/redmine-#{redmine[:version]}"
 default[:redmine][:dl_id]   = "56909"
 default[:redmine][:version] = "0.8.4"
 
-default[:redmine][:db][:type]     = "sqlite"
+default[:redmine][:db][:type]     = "mysql"
 default[:redmine][:db][:user]     = "redmine"
 default[:redmine][:db][:password] = pw
 default[:redmine][:db][:hostname] = "localhost"
