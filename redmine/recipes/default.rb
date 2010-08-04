@@ -29,7 +29,7 @@ bash "install_redmine" do
   code <<-EOH
     wget http://rubyforge.org/frs/download.php/#{node[:redmine][:dl_id]}/redmine-#{node[:redmine][:version]}.tar.gz
     tar xf redmine-#{node[:redmine][:version]}.tar.gz
-    chown -R #{node[:apache][:user]} redmine-#{node[:redmine][:version]}
+    chmod -R a+rw redmine-#{node[:redmine][:version]}
   EOH
   not_if { File.exists?("/srv/redmine-#{node[:redmine][:version]}/Rakefile") }
 end
@@ -41,6 +41,7 @@ end
 case node[:redmine][:db][:type]
 when "sqlite"
   include_recipe "sqlite"
+  package "sqlite3-devel" if platform?("centos", "redhat")
   gem_package "sqlite3-ruby"
   file "/srv/redmine-#{node[:redmine][:version]}/db/production.db" do
     owner node[:apache][:user]
