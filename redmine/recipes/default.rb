@@ -41,7 +41,7 @@ end
 case node[:redmine][:db][:type]
 when "sqlite"
   include_recipe "sqlite"
-  package "sqlite3-devel" if platform?("centos", "redhat")
+  package "sqlite-devel" if platform?("centos", "redhat")
   gem_package "sqlite3-ruby"
   file "/srv/redmine-#{node[:redmine][:version]}/db/production.db" do
     owner node[:apache][:user]
