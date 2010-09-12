@@ -42,10 +42,14 @@ extra_packages = case node[:platform]
       ruby-rdoc
       ruby-mode
     }
+  when "arch"
+    %w{ ruby-docs }
   end
 
-extra_packages.each do |pkg|
-  package pkg do
-    action :install
+unless extra_packages.nil?
+  extra_packages.each do |pkg|
+    package pkg do
+      action :install
+    end
   end
 end
